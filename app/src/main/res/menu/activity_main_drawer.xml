@@ -4,15 +4,33 @@
     <item android:title="Communication">
         <menu>
             <item
-                android:id="@+id/nav_camera"
+                android:id="@+id/nav_mymessages"
+                android:icon="@drawable/ic_menu_camera"
+                android:title="My Messages" />
+            <item
+                android:id="@+id/nav_myfriends"
+                android:icon="@drawable/ic_menu_gallery"
+                android:title="My Friends" />
+            <item
+                android:id="@+id/nav_mygroups"
+                android:icon="@drawable/ic_menu_slideshow"
+                android:title="MyGroups" />
+
+        </menu>
+    </item>
+
+    <item android:title="Add/Create">
+        <menu>
+            <item
+                android:id="@+id/nav_addfriend"
                 android:icon="@drawable/ic_menu_camera"
                 android:title="Add a Friend" />
             <item
-                android:id="@+id/nav_gallery"
+                android:id="@+id/nav_joingroup"
                 android:icon="@drawable/ic_menu_gallery"
                 android:title="Join a Group" />
             <item
-                android:id="@+id/nav_slideshow"
+                android:id="@+id/nav_creategroup"
                 android:icon="@drawable/ic_menu_slideshow"
                 android:title="Create a Group" />
 
