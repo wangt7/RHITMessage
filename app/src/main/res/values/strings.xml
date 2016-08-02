@@ -6,4 +6,6 @@
 
     <string name="action_settings">Settings</string>
     <string name="settings">Settings</string>
+    <string name="add_friend_title">Please enter your friend\'s ID</string>
+    <string name="join_group_title">Please enter the group ID</string>
 </resources>

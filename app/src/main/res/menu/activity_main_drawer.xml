@@ -3,19 +3,20 @@
 
     <item android:title="Communication">
         <menu>
-            <item
-                android:id="@+id/nav_mymessages"
-                android:icon="@drawable/ic_menu_camera"
-                android:title="My Messages" />
-            <item
-                android:id="@+id/nav_myfriends"
-                android:icon="@drawable/ic_menu_gallery"
-                android:title="My Friends" />
-            <item
-                android:id="@+id/nav_mygroups"
-                android:icon="@drawable/ic_menu_slideshow"
-                android:title="MyGroups" />
-
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_mymessages"
+                    android:icon="@drawable/ic_menu_camera"
+                    android:title="My Messages" />
+                <item
+                    android:id="@+id/nav_myfriends"
+                    android:icon="@drawable/ic_menu_gallery"
+                    android:title="My Friends" />
+                <item
+                    android:id="@+id/nav_mygroups"
+                    android:icon="@drawable/ic_menu_slideshow"
+                    android:title="MyGroups" />
+            </group>
         </menu>
     </item>
 
@@ -36,13 +37,30 @@
 
         </menu>
     </item>
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_setting"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/settings" />
-    </group>
+
+    <item android:title="Settings">
+        <menu>
+            <item
+                android:id="@+id/nav_setting"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Settings" />
+
+        </menu>
+    </item>
+
 
 
 
 </menu>
+
+
+
+
+
+
+
+
+
+
+
+
