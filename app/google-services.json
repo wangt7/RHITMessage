@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "206665224435",
+    "firebase_url": "https://rhitmessage.firebaseio.com",
+    "project_id": "rhitmessage",
+    "storage_bucket": "rhitmessage.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:206665224435:android:f69d086944add06c",
+        "android_client_info": {
+          "package_name": "edu.rose_hulman.tianjia.rhitmessage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "206665224435-644stfbl0mhdueqrvjcutk2v7pb6gqfi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSX-IKi2OF0xKHNEdU924N9BkUPMhQStU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
