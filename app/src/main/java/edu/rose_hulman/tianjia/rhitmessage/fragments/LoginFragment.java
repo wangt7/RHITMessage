@@ -22,6 +22,7 @@ public class LoginFragment extends Fragment {
     private OnLoginListener mListener;
 
     public LoginFragment() {
+
     }
 
     @Override

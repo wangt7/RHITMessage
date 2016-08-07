@@ -10,6 +10,7 @@
         app:cardCornerRadius="15dp"
         app:cardUseCompatPadding="true"
         android:id="@+id/messagecard_view"
+        app:cardBackgroundColor="@color/colorCard"
         >
 
 
@@ -36,7 +37,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/message_info_view"
+            android:id="@+id/messageinfo_view"
             android:layout_marginLeft="105dp"
             android:layout_marginTop="35dp"
             android:text="Message Preview"

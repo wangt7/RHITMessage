@@ -6,6 +6,7 @@ package edu.rose_hulman.tianjia.rhitmessage.utils;
 public class Group {
     private String groupname;
     private int groupicon;
+    private int groupid;
 
     public Group(String newname, int newicon){
         groupname = newname;

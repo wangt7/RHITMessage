@@ -10,6 +10,8 @@
         app:cardCornerRadius="15dp"
         app:cardUseCompatPadding="true"
         android:id="@+id/friendcard_view"
+        app:cardBackgroundColor="@color/colorCard"
+
         >
 
 

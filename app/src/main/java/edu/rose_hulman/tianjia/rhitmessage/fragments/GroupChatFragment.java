@@ -1,6 +1,5 @@
 package edu.rose_hulman.tianjia.rhitmessage.fragments;
 
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,21 +8,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import edu.rose_hulman.tianjia.rhitmessage.R;
-import edu.rose_hulman.tianjia.rhitmessage.utils.Message;
-import edu.rose_hulman.tianjia.rhitmessage.utils.MessageAdapter;
+import edu.rose_hulman.tianjia.rhitmessage.utils.GroupChatAdapter;
 
 /**
- * Created by wtj46 on 2016/7/22 0022.
+ * Created by wtj46 on 2016/8/7 0007.
  */
-public class MessageListFragment extends Fragment implements AdapterView.OnItemSelectedListener{
+public class GroupChatFragment extends Fragment  {
+
 
     private Callback mCallback;
 
 
-    public MessageListFragment(){
+    public GroupChatFragment(){
 
     }
 
@@ -33,7 +31,7 @@ public class MessageListFragment extends Fragment implements AdapterView.OnItemS
 
         RecyclerView view = (RecyclerView)inflater.inflate(R.layout.fragment_groups, container, false);
         view.setLayoutManager(new LinearLayoutManager(getContext()));
-        MessageAdapter adapter  = new MessageAdapter(getContext(), mCallback);
+        GroupChatAdapter adapter  = new GroupChatAdapter(getContext(), mCallback);
         view.setAdapter(adapter);
         return view;
     }
@@ -46,7 +44,7 @@ public class MessageListFragment extends Fragment implements AdapterView.OnItemS
             mCallback = (Callback) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement MessageListFragment.Callback");
+                    + " must implement GroupListFragment.Callback");
         }
     }
 
@@ -58,17 +56,8 @@ public class MessageListFragment extends Fragment implements AdapterView.OnItemS
 
 
     public interface Callback {
-        void onMessageSelect(Message message);
-    }
-
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
 
-    }
 }

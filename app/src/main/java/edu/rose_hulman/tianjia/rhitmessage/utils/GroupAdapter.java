@@ -57,13 +57,13 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(GroupAdapter.ViewHolder holder, int position) {
         final Group group = mGroups.get(position);
-        holder.mGroupNameTextView.setText(group.getGroupname());
-        holder.mGroupIconTextView.setImageResource(group.getGroupicon());
+        holder.mGroupNameView.setText(group.getGroupname());
+        holder.mGroupIconView.setImageResource(group.getGroupicon());
 
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //openChatPage
+
             }
         });
 
@@ -79,13 +79,13 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder>{
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView mGroupNameTextView;
-        private ImageView mGroupIconTextView;
+        private TextView mGroupNameView;
+        private ImageView mGroupIconView;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mGroupNameTextView = (TextView) itemView.findViewById(R.id.groupname_view);
-            mGroupIconTextView = (ImageView) itemView.findViewById(R.id.groupicon_view);
+            mGroupNameView = (TextView) itemView.findViewById(R.id.groupname_view);
+            mGroupIconView = (ImageView) itemView.findViewById(R.id.groupicon_view);
         }
     }
 }
