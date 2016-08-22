@@ -25,6 +25,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import edu.rose_hulman.tianjia.rhitmessage.R;
 import edu.rose_hulman.tianjia.rhitmessage.fragments.FriendChatFragment;
@@ -41,8 +43,8 @@ public class MainActivity extends AppCompatActivity
         GroupAdapter.Callback, GroupListFragment.Callback,MessageAdapter.Callback, MessageListFragment.Callback, FriendChatAdapter.Callback, FriendChatFragment.Callback,
         GroupChatAdapter.Callback, GroupChatFragment.Callback, LoginFragment.OnLoginListener {
 
-
     private FriendAdapter mFriendAdapter;
+    private GroupAdapter mGroupAdapter;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     private static final int RC_ROSEFIRE_LOGIN = 1;
@@ -75,19 +77,10 @@ public class MainActivity extends AppCompatActivity
         mAuth = FirebaseAuth.getInstance();
         initializeListeners();
 
-
-//        mFriendAdapter = new FriendAdapter(this);
-//        RecyclerView view = (RecyclerView) findViewById(R.id.recycler_view);
-//        view.setLayoutManager(new LinearLayoutManager(this));
-//        view.setHasFixedSize(true);
-//        view.setAdapter(mFriendAdapter);
-
-//        if(savedInstanceState == null) {
-//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//            ft.add(R.id.fragment_container, new Fragment());
-//            ft.commit();
-//        }
-
+        DatabaseReference friendRef = FirebaseDatabase.getInstance().getReference().child("friends");
+        mFriendAdapter = new FriendAdapter(this, friendRef);
+        DatabaseReference groupRef = FirebaseDatabase.getInstance().getReference().child("groups");
+        mGroupAdapter = new GroupAdapter(this, groupRef);
 
     }
 
@@ -174,19 +167,14 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -197,7 +185,6 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_mymessages) {
@@ -284,6 +271,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void onFriendDelete(Friend friend) {
+        showDeleteFriendDialog(friend);
+    }
+
+    @Override
     public void onGroupSelect(Group group) {
         switchToGroupChatFragment();
     }
@@ -303,7 +295,8 @@ public class MainActivity extends AppCompatActivity
                 builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        Friend newfriend = new Friend(friendIDEditText.getText().toString(), R.drawable.rhit_icon);
+                        mFriendAdapter.firebaseAdd(newfriend);
                     }
                 });
                 builder.setNegativeButton(android.R.string.cancel, null);
@@ -327,7 +320,8 @@ public class MainActivity extends AppCompatActivity
                 builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        Group newgroup = new Group(groupIDEditText.getText().toString(), R.drawable.rhit_group);
+                        mGroupAdapter.firebaseCreate(newgroup);
                     }
                 });
                 builder.setNegativeButton(android.R.string.cancel, null);
@@ -346,12 +340,13 @@ public class MainActivity extends AppCompatActivity
                 builder.setTitle(R.string.create_group_title);
                 View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_create_group, null, false);
                 builder.setView(view);
-                final EditText groupNameEditText = (EditText) view.findViewById(R.id.dialog_join_group_id);
+                final EditText groupNameEditText = (EditText) view.findViewById(R.id.dialog_create_group_name);
 
                 builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        Group newgroup = new Group(groupNameEditText.getText().toString(), R.drawable.rhit_group);
+                        mGroupAdapter.firebaseCreate(newgroup);
                     }
                 });
                 builder.setNegativeButton(android.R.string.cancel, null);
@@ -360,6 +355,26 @@ public class MainActivity extends AppCompatActivity
             }
         };
         df.show(getSupportFragmentManager(), "creategroup");
+    }
+
+    private void showDeleteFriendDialog(final Friend friend) {
+        DialogFragment df = new DialogFragment() {
+            @Override
+            public Dialog onCreateDialog(Bundle savedInstanceState) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Delete this friend?");
+                builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mFriendAdapter.firebaseRemove(friend);
+                    }
+                });
+                builder.setNegativeButton(android.R.string.cancel, null);
+
+                return builder.create();
+            }
+        };
+        df.show(getSupportFragmentManager(), "delete");
     }
 
 

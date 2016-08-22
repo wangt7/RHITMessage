@@ -1,18 +1,18 @@
 package edu.rose_hulman.tianjia.rhitmessage.utils;
 
 /**
- * Created by wtj46 on 2016/7/22 0022.
+ * Created by wtj46 on 2016/8/22 0022.
  */
-public class Message {
+public class GroupMessage {
     private String content;
     private String sender;
-    private String receiver;
+    private String groupname;
     private String time;
     private String key;
 
-    public Message(String newsender, String newreceiver, String newcontent){
+    public GroupMessage(String newgroupname, String newsender, String newcontent){
+        groupname = newgroupname;
         sender = newsender;
-        receiver = newreceiver;
         content = newcontent;
     }
 
@@ -33,10 +33,6 @@ public class Message {
         this.sender = sender;
     }
 
-    public String getReceiver() {
-        return receiver;
-    }
-
     public String getTime() {
         return time;
     }
@@ -51,5 +47,13 @@ public class Message {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public String getGroupname() {
+        return groupname;
+    }
+
+    public void setGroupname(String groupname) {
+        this.groupname = groupname;
     }
 }

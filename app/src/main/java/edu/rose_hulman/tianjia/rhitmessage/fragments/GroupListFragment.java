@@ -2,6 +2,7 @@ package edu.rose_hulman.tianjia.rhitmessage.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import edu.rose_hulman.tianjia.rhitmessage.R;
 import edu.rose_hulman.tianjia.rhitmessage.utils.Friend;
@@ -22,10 +28,20 @@ import edu.rose_hulman.tianjia.rhitmessage.utils.GroupAdapter;
 public class GroupListFragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
     private Callback mCallback;
+    private GroupAdapter mGroupAdapter;
+    private DatabaseReference mGroupListdRef;
 
 
     public GroupListFragment(){
 
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        mGroupListdRef = FirebaseDatabase.getInstance().getReference().child("groups");
     }
 
     @Override
@@ -34,8 +50,8 @@ public class GroupListFragment extends Fragment implements AdapterView.OnItemSel
 
         RecyclerView view = (RecyclerView)inflater.inflate(R.layout.fragment_groups, container, false);
         view.setLayoutManager(new LinearLayoutManager(getContext()));
-        GroupAdapter adapter  = new GroupAdapter(getContext(), mCallback);
-        view.setAdapter(adapter);
+        mGroupAdapter  = new GroupAdapter(mCallback, mGroupListdRef);
+        view.setAdapter(mGroupAdapter);
         return view;
     }
 

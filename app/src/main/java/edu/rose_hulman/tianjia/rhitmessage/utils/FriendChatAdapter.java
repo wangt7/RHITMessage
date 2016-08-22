@@ -35,11 +35,6 @@ public class FriendChatAdapter extends RecyclerView.Adapter<FriendChatAdapter.Vi
     public void tmptest(){
         mFriendMessages.add(new Message("Tianjia Wang", "Dr.Boutell", "Hello"));
         mFriendMessages.add(new Message("Dr.Boutell", "Tianjia Wang", "Hi"));
-        mFriendMessages.add(new Message("Tianjia", "Terry", "HelloHelloHelloHelloHelloHelloHelloHelloHelloHello"));
-        mFriendMessages.add(new Message("Tianjia", "Terry", "HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello"));
-        mFriendMessages.add(new Message("Tianjia", "Terry", "HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello"));
-        mFriendMessages.add(new Message("Tianjia", "Terry", "HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello"));
-        mFriendMessages.add(new Message("Tianjia", "Terry", "!@%^%$&^#@%$&^%$#@%$^&%@#^&%*^(*#&$)&(@#*$&(*^@$*(&^#@*&$%)_!#*($+)*(++!#+_)"));
     }
 
     @Override

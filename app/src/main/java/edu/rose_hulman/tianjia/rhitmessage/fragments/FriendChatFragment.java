@@ -29,7 +29,7 @@ public class FriendChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        RecyclerView view = (RecyclerView)inflater.inflate(R.layout.fragment_groups, container, false);
+        RecyclerView view = (RecyclerView)inflater.inflate(R.layout.fragment_friends, container, false);
         view.setLayoutManager(new LinearLayoutManager(getContext()));
         FriendChatAdapter adapter  = new FriendChatAdapter(getContext(), mCallback);
         view.setAdapter(adapter);
@@ -58,5 +58,8 @@ public class FriendChatFragment extends Fragment {
     public interface Callback {
 
     }
+
+
+
 
 }

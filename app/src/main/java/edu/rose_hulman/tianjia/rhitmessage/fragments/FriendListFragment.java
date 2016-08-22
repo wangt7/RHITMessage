@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +14,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import edu.rose_hulman.tianjia.rhitmessage.Constants;
 import edu.rose_hulman.tianjia.rhitmessage.R;
+import edu.rose_hulman.tianjia.rhitmessage.Constants;
 import edu.rose_hulman.tianjia.rhitmessage.utils.Friend;
 import edu.rose_hulman.tianjia.rhitmessage.utils.FriendAdapter;
 
@@ -23,10 +31,21 @@ import edu.rose_hulman.tianjia.rhitmessage.utils.FriendAdapter;
 public class FriendListFragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
     private Callback mCallback;
+    private FriendAdapter mFriendAdapter;
+    private DatabaseReference mFriendListdRef;
+
 
 
     public FriendListFragment(){
 
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        mFriendListdRef = FirebaseDatabase.getInstance().getReference().child("friends");
     }
 
     @Override
@@ -35,8 +54,8 @@ public class FriendListFragment extends Fragment implements AdapterView.OnItemSe
 
         RecyclerView view = (RecyclerView)inflater.inflate(R.layout.fragment_friends, container, false);
         view.setLayoutManager(new LinearLayoutManager(getContext()));
-        FriendAdapter adapter  = new FriendAdapter(getContext(), mCallback);
-        view.setAdapter(adapter);
+        mFriendAdapter  = new FriendAdapter(mCallback, mFriendListdRef);
+        view.setAdapter(mFriendAdapter);
         return view;
     }
 
@@ -58,6 +77,11 @@ public class FriendListFragment extends Fragment implements AdapterView.OnItemSe
         mCallback = null;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        //mFriendListdRef.removeEventListener(mFriendAdapter);
+    }
 
     public interface Callback {
         void onFriendSelect(Friend friend);

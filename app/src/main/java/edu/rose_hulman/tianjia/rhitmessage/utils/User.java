@@ -6,6 +6,4 @@ package edu.rose_hulman.tianjia.rhitmessage.utils;
 public class User {
     private String username;
     private int icon;
-
-
 }

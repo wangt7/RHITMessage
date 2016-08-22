@@ -37,10 +37,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         mMessages.add(new Message("Dr.Boutell", "Tianjia Wang", "Hi"));
         mMessages.add(new Message("Tianjia", "Terry", "HelloHelloHelloHelloHelloHelloHelloHelloHelloHello"));
         mMessages.add(new Message("Tianjia", "Terry", "HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello"));
-        mMessages.add(new Message("Tianjia", "Terry", "HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello"));
-        mMessages.add(new Message("Tianjia", "Terry", "HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello"));
-        mMessages.add(new Message("Tianjia", "Terry", "!@%^%$&^#@%$&^%$#@%$^&%@#^&%*^(*#&$)&(@#*$&(*^@$*(&^#@*&$%)_!#*($+)*(++!#+_)"));
-
     }
 
     @Override
@@ -53,7 +49,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public void onBindViewHolder(MessageAdapter.ViewHolder holder, int position) {
         final Message message = mMessages.get(position);
         holder.mMessageNameView.setText(message.getReceiver());
-        //holder.mMessageIconView.setImageResource();
+        holder.mMessageIconView.setImageResource(R.drawable.rhit_message_icon);
         String tmp = message.getContent();
         if(tmp.length() > 120) {
             tmp = tmp.substring(0, 120);

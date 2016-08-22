@@ -12,4 +12,6 @@
     <color name="warning">#FF5722</color>
     <color name="black">#000000</color>
     <color name="colorCard">#0a8fe2</color>
+    <color name="colorReceiverBackground">#d6d1d1</color>
+    <color name="colorSenderBackground">#7ca9f9</color>
 </resources>

@@ -8,9 +8,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+
 import java.util.ArrayList;
 
 import edu.rose_hulman.tianjia.rhitmessage.R;
+import edu.rose_hulman.tianjia.rhitmessage.fragments.FriendListFragment;
 import edu.rose_hulman.tianjia.rhitmessage.fragments.GroupListFragment;
 
 /**
@@ -19,33 +25,13 @@ import edu.rose_hulman.tianjia.rhitmessage.fragments.GroupListFragment;
 public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder>{
     private ArrayList<Group> mGroups;
     private Callback mCallback;
-    //private firebase...
+    private DatabaseReference mGroupRef;
 
-    public GroupAdapter(Callback callback){
-        mCallback = callback;
-        mGroups = new ArrayList<>();
-        tmptest();
-    }
-
-    public GroupAdapter(Context context, GroupListFragment.Callback callback){
+    public GroupAdapter(GroupListFragment.Callback callback, DatabaseReference newgroupRef){
         mCallback = (Callback) callback;
         mGroups = new ArrayList<>();
-        tmptest();
-    }
-
-    public void tmptest(){
-        mGroups.add(new Group("My Group", R.drawable.ic_menu_camera));
-        mGroups.add(new Group("Your Group", R.drawable.ic_menu_gallery));
-        mGroups.add(new Group("CSSE220", R.drawable.ic_menu_camera));
-        mGroups.add(new Group("CSSE230", R.drawable.ic_menu_camera));
-        mGroups.add(new Group("CSSE333", R.drawable.ic_menu_camera));
-        mGroups.add(new Group("CSSE481", R.drawable.ic_menu_camera));
-        mGroups.add(new Group("CSSE483", R.drawable.ic_menu_camera));
-        mGroups.add(new Group("CSSE486", R.drawable.ic_menu_camera));
-        mGroups.add(new Group("CSSE999", R.drawable.ic_menu_camera));
-        mGroups.add(new Group("CSSE000", R.drawable.ic_menu_camera));
-
-
+        mGroupRef = newgroupRef;
+        mGroupRef.addChildEventListener(new GroupChildEventListener());
     }
 
     @Override
@@ -63,10 +49,63 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder>{
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
+                mCallback.onGroupSelect(group);
             }
         });
 
+    }
+
+    class GroupChildEventListener implements ChildEventListener {
+
+        @Override
+        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+            Group group = dataSnapshot.getValue(Group.class);
+            group.setKey(dataSnapshot.getKey());
+            mGroups.add(0, group);
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            String key = dataSnapshot.getKey();
+            Group updateGroup = dataSnapshot.getValue(Group.class);
+            for (Group tmpgroup : mGroups) {
+                if (tmpgroup.getKey().equals(key)) {
+                    tmpgroup.setGroupname(updateGroup.getGroupname());
+                    notifyDataSetChanged();
+                }
+            }
+        }
+
+        @Override
+        public void onChildRemoved(DataSnapshot dataSnapshot) {
+            String key = dataSnapshot.getKey();
+            for (Group tmpgroup : mGroups) {
+                if (tmpgroup.getKey().equals(key)) {
+                    mGroups.remove(tmpgroup);
+                    notifyDataSetChanged();
+                    return;
+                }
+            }
+        }
+
+        @Override
+        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+    }
+
+    public void firebaseCreate(Group newgroup) {
+        mGroupRef.push().setValue(newgroup);
+    }
+
+    public void firebaseRemove(Group group) {
+        mGroupRef.child(group.getKey()).removeValue();
     }
 
     @Override

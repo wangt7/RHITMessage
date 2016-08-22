@@ -32,13 +32,8 @@ public class GroupChatAdapter extends RecyclerView.Adapter<GroupChatAdapter.View
     }
 
     public void tmptest(){
-        mGroupMessages.add(new Message("Tianjia Wang", "Dr.Boutell", "Hello"));
-        mGroupMessages.add(new Message("Dr.Boutell", "Tianjia Wang", "Hi"));
-        mGroupMessages.add(new Message("Tianjia", "Terry", "HelloHelloHelloHelloHelloHelloHelloHelloHelloHello"));
-        mGroupMessages.add(new Message("Tianjia", "Terry", "HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello"));
-        mGroupMessages.add(new Message("Tianjia", "Terry", "HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello"));
-        mGroupMessages.add(new Message("Tianjia", "Terry", "HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello"));
-        mGroupMessages.add(new Message("Tianjia", "Terry", "!@%^%$&^#@%$&^%$#@%$^&%@#^&%*^(*#&$)&(@#*$&(*^@$*(&^#@*&$%)_!#*($+)*(++!#+_)"));
+        mGroupMessages.add(new Message("CSSE483", "wangt5", "Hello Everyone"));
+        mGroupMessages.add(new Message("CSSE230", "Tianjia Wang", "Today's homework is to finish the lab0123456789"));
     }
 
     @Override

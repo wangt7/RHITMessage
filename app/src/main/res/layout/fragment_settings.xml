@@ -4,5 +4,13 @@
     android:layout_width="match_parent"
     android:id = "@+id/setting_fragment">
 
+    <CheckBoxPreference
+        android:key="pref_sync"
+        android:title="title"
+        android:summary="summary"
+        android:defaultValue="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 
 </PreferenceScreen>
